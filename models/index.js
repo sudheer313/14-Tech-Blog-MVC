@@ -1,29 +1,31 @@
 const User = require('./User');
 const Blogpost = require('./Blogpost');
-const Comment= require('./Comment')
+const Comment = require('./Comment');
 
 User.hasMany(Blogpost, {
   foreignKey: 'user_id',
-  onDelete: 'CASCADE'
+  onDelete: 'CASCADE',
 });
 Blogpost.belongsTo(User, {
-  foreignKey: 'user_id'
+  foreignKey: 'user_id',
 });
 Blogpost.hasMany(Comment, {
   foreignKey: 'user_id',
-  onDelete: 'CASCADE'
+  onDelete: 'CASCADE',
 });
 Comment.belongsTo(Blogpost, {
-  foreignKey: 'blogpost_id'
+  foreignKey: 'blogpost_id',
 });
-User.hasMany(Comment,{
+Comment.belongsTo(User, {
   foreignKey: 'user_id',
-  onDelete: 'CASCADE'
-})
-
+});
+User.hasMany(Comment, {
+  foreignKey: 'user_id',
+  onDelete: 'CASCADE',
+});
 
 Blogpost.belongsTo(User, {
-  foreignKey: 'user_id'
+  foreignKey: 'user_id',
 });
 
-module.exports = { User, Blogpost,Comment };
+module.exports = { User, Blogpost, Comment };
