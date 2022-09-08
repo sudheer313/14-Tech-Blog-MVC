@@ -26,9 +26,41 @@ router.get('/', async (req, res) => {
     res.status(500).json(err);
   }
 });
-
+//
 router.get('/project/:id', async (req, res) => {
   console.log('test');
+  try {
+    const blogPostData = await Blogpost.findByPk(req.params.id, {
+      include: [
+        {
+          model: User,
+          attributes: ['name'],
+        },
+        {
+          model: Comment,
+          attributes: ['text'],
+          include: [
+            {
+              model: User,
+              attributes: ['name'],
+            },
+          ],
+        },
+      ],
+    });
+    console.log(blogPostData);
+    const blogPost = blogPostData.get({ plain: true });
+    console.log(blogPost);
+    res.render('blogPost', {
+      ...blogPost,
+      logged_in: req.session.logged_in,
+    });
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
+router.get('/blogPost/:id', withAuth, async (req, res) => {
   try {
     const blogPostData = await Blogpost.findByPk(req.params.id, {
       include: [
@@ -76,6 +108,7 @@ router.get('/profile', withAuth, async (req, res) => {
       logged_in: true,
     });
   } catch (err) {
+    console.log(err);
     res.status(500).json(err);
   }
 });
@@ -90,4 +123,38 @@ router.get('/login', (req, res) => {
   res.render('login');
 });
 
+
+router.get('/blogPost/edit/:id', withAuth, async (req, res) => {
+  try {
+    const blogPostData = await Blogpost.findByPk(req.params.id, {
+      include: [
+        {
+          model: User,
+          attributes: ['name'],
+        },
+        {
+          model: Comment,
+          attributes: ['text'],
+          include: [
+            {
+              model: User,
+              attributes: ['name'],
+            },
+          ],
+        },
+      ],
+    });
+    console.log(blogPostData);
+    const blogPost = blogPostData.get({ plain: true });
+    console.log(blogPost);
+    res.render('edit', {
+      ...blogPost,
+      logged_in: req.session.logged_in,
+    });
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
 module.exports = router;
+

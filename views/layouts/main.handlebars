@@ -16,6 +16,7 @@
   </head>
 
   <body>
+    <div class="bacground-image-container">
     <nav class='navbar navbar-expand-lg navbar-light bg-light'>
       <a class='navbar-brand' href='#'>Tech-Blog</a>
       <button
@@ -31,19 +32,19 @@
       </button>
       <div class='collapse navbar-collapse' id='navbarNavAltMarkup'>
         <div class='navbar-nav'>
-          <a class='nav-item nav-link active' href='#'>Dashboard
+          <a class='nav-item nav-link active' href='/'>Dashboard
             {{#if logged_in}}
             <a href='/profile'>profile</a>
             |
             <button class='no-button' id='logout'>logout</button>
           {{else}}
-            <a href='/login'>login</a>
+            <a class='nav-item nav-link active' href='/login'>login</a>
           {{/if}}
           
         </div>
       </div>
     </nav>
-    <main class='container container-fluid mt-5'>
+    <main class='container container-fluid mt-5' id="main-body">
         <!-- Render the sub layout -->
         {{{body}}}
       </main>
@@ -111,7 +112,9 @@
     {{#if logged_in}}
       <script src='/js/logout.js'></script>
     {{/if}} --}}
+    </div>
     <script
+
       src='https://code.jquery.com/jquery-3.3.1.slim.min.js'
       integrity='sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo'
       crossorigin='anonymous'

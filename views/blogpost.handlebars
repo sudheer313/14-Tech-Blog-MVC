@@ -1,9 +1,11 @@
-<div class='text-center'>
+<div class='text-center blogpost_content'>
   <h2>{{title}}</h2>
   <p>{{{get_emoji}}}</p>
   <p>{{content}}</p>
   <p>Created by {{user.name}} on {{format_date createdAt}}</p>
-
+  {{#each comments}}
+    <li>{{this.text}}</li>
+  {{/each}}
   <p>
     <button class='btn btn-primary'>BlogPost!</button>
   </p>

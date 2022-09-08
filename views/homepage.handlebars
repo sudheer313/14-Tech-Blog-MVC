@@ -1,19 +1,41 @@
 <!-- Loop over each object in the projects array -->
-{{#each blogPosts as |blogPost| }}
-<div class="row mb-4 project">
-  <div class="col-md-5">
-    <h2>
-      <!-- Call helper function with triple brackets to render the emoji span as HTML -->
-      {{{get_emoji}}}
-      <a href="/blogPost/{{blogPost.id}}">{{blogPost.title}}</a>
-    </h2>
-   
-    <p>Created by {{blogPost.user.name}} on {{format_date blogPost.createdAt}}</p>
+{{#each blogPosts as |blogPost|}}
+  <div class='row mb-4 project'>
+    <div class='col-md-5'>
+      <h2>
+        <!-- Call helper function with triple brackets to render the emoji span as HTML -->
+        {{{get_emoji}}}
+        <a
+          class='blogpost_title'
+          href='/blogPost/{{blogPost.id}}'
+        >{{blogPost.title}}</a>
+      </h2>
+
+      <p>Created by
+        {{blogPost.user.name}}
+        on
+        {{format_date blogPost.createdAt}}</p>
+    </div>
+    <div class='col-md-7'>
+      <p>
+        {{blogPost.content}}
+      </p>
+    </div>
+    <div class='col-md-4'>
+
+      <button
+        class='btn btn-sm btn-danger delete-blogpost'
+        data-id='{{blogPost.id}}'
+      >DELETE</button>
+      <button
+        class='btn btn-sm btn-primary update-blogpost'
+        data-id='{{blogPost.id}}'
+      >Update</button>
+       <button
+        class='btn btn-sm btn-primary comment-blogpost'
+        data-id='{{blogPost.id}}'
+      >Comment</button>
+    </div>
   </div>
-  <div class="col-md-7">
-    <p>
-      {{blogPost.content}}
-    </p>
-  </div>    
-</div>
 {{/each}}
+<script src='./js/blogpost.js'></script>

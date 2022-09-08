@@ -1,49 +1,90 @@
-<div class="row">
-  <div class="col-auto">
+<div class='row'>
+  <div class='col-auto'>
     <h2>Welcome, {{name}}!</h2>
   </div>
 </div>
 
-<div class="row mt-4">
-  <div class="col-md-6">
+<div class='row mt-4'>
+  <div class='col-md-6'>
     <h3>Create a New Project:</h3>
 
-    <form class="form new-project-form">
-      <div class="form-group">
-        <label for="project-name">Title:</label>
-        <input class="form-input" type="text" id="project-name" name="project-name" />
+    <form class='form new-project-form'>
+      <div class='form-group'>
+        <label for='project-name'>Title:</label>
+        <input
+          class='form-input'
+          type='text'
+          id='project-name'
+          name='project-name'
+        />
       </div>
 
-      
-      <div class="form-group">
-        <label for="project-desc">Content:</label>
-        <textarea class="form-input" id="project-desc" name="project-desc"></textarea>
+      <div class='form-group'>
+        <label for='project-desc'>Content:</label>
+        <textarea
+          class='form-input'
+          id='project-desc'
+          name='project-desc'
+        ></textarea>
       </div>
-      <div class="form-group">
-        <button type="submit" class="btn btn-primary">Create Post</button>
+      <div class='form-group'>
+        <button type='submit' class='btn btn-primary'>Create Post</button>
       </div>
     </form>
   </div>
 
   {{#if blogposts.length}}
-  <div class="col-md-6 project-list">
-    <h3>Current Posts:</h3>
+    <div class='col-md-6 project-list'>
+      <h3>Current Posts:</h3>
 
-    {{#each blogposts as |project|}}
-    <div class="row mb-2">
-      <div class="col-md-8">
-        <h4><a href="/project/{{project.id}}">{{project.title}}</a></h4>
-      </div>
+      {{#each blogposts as |project|}}
+        <div class='row mb-2'>
+          <div class='col-md-8' class='title'>
+            <h4><a href='/project/{{project.id}}'>{{project.title}}</a></h4>
+          </div>
+          <form class='form' style='display:none;'>
+            <div class='form-group project-title'>
+              <label>Title:</label>
+              <input
+                class='form-input'
+                type='text'
+                name='project-name'
+                value='{{project.title}}'
+              />
+            </div>
 
-      <div class="col-md-4">
-        
-        <span>{{format_date project.createdAt}}</span>
-        <button class="btn btn-sm btn-danger" data-id="{{project.id}}">DELETE</button>
-      </div>
+            <div class='form-group project-desc'>
+              <label>Content:</label>
+              <textarea
+                class='form-input'
+                name='project-desc'
+              >{{project.content}}</textarea>
+            </div>
+            <div class='form-group'>
+              <button
+                class='btn btn-primary update-form'
+                data-id='{{project.id}}'
+              >Save</button>
+              <button class='btn btn-primary cancel-form'>Cancel</button>
+            </div>
+          </form>
+
+          {{!-- <div class='col-md-4'>
+
+            <span>{{format_date project.createdAt}}</span>
+            <button
+              class='btn btn-sm btn-danger delete-project'
+              data-id='{{project.id}}'
+            >DELETE</button>
+            <button
+              class='btn btn-sm btn-primary'
+              data-id='{{project.id}}'
+            >Update</button>
+          </div> --}}
+        </div>
+      {{/each}}
     </div>
-    {{/each}}
-  </div>
   {{/if}}
 </div>
 
-<script src="./js/profile.js"></script>
+<script src='./js/profile.js'></script>
