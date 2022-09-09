@@ -123,7 +123,6 @@ router.get('/login', (req, res) => {
   res.render('login');
 });
 
-
 router.get('/blogPost/edit/:id', withAuth, async (req, res) => {
   try {
     const blogPostData = await Blogpost.findByPk(req.params.id, {
@@ -156,5 +155,15 @@ router.get('/blogPost/edit/:id', withAuth, async (req, res) => {
   }
 });
 
-module.exports = router;
+router.get('/blogPost/:id/comment', withAuth, async (req, res) => {
+  try {
+    res.render('comments', {
+      logged_in: req.session.logged_in,
+      id: req.params.id,
+    });
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
 
+module.exports = router;

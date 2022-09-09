@@ -41,3 +41,13 @@ height: 100%;
 .update-project{
   background-color: #065b83;
 }
+
+.displayForm{
+  visibility: hidden;
+}
+
+.comment-form{
+  background-color: black;
+padding: 20px;
+color: white;
+}

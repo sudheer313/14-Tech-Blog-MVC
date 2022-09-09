@@ -47,3 +47,4 @@ window.addEventListener('load', (event) => {
 
   // $('.update-form').on('click', updateButtonHandler);
 });
+
