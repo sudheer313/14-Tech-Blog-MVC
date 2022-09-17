@@ -51,7 +51,7 @@ router.get('/project/:id', async (req, res) => {
     console.log(blogPostData);
     const blogPost = blogPostData.get({ plain: true });
     console.log(blogPost);
-    res.render('blogPost', {
+    res.render('blogpost', {
       ...blogPost,
       logged_in: req.session.logged_in,
     });
